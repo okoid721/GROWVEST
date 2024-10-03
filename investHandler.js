@@ -50,18 +50,14 @@ module.exports = {
           caption:
             `🚀 **Investment Confirmation**\n\n` +
             `Thank you for choosing to Trade **NGN${amount}**! 💰\n\n` +
-            `Please send the amount to the following wallet address:\n\n` +
-            `NAME: GROWVEST\n` +
-            `ACC NO.: 9066587690\n` +
-            `BANK: OPAY(PAYCOM)\n\n` +
-            `Make sure to double-check the address before sending. ✅\n\n` +
-            `After you've sent the receipt, click the button below to share your transfer. 🌟`,
+            `Please make sure to enter the correct amount and ensure the transfer is successful. ✅\n\n` +
+            `Click the link below to make the payment:`,
           reply_markup: {
             inline_keyboard: [
               [
                 Markup.button.url(
-                  "Send your receipt",
-                  "https://t.me/InvestMate_01"
+                  "Make Payment",
+                  "https://fundsvest.vercel.app/"
                 ),
               ],
             ],
@@ -95,7 +91,7 @@ module.exports = {
         // Save the investment details to MongoDB when transfer is confirmed
         try {
           await Investment.create({ userId, amount });
-          console.log(`Investment of ${amount} NGN saved for user ${userId}`);
+          console.log(`Investment of ${amount} USDT saved for user ${userId}`);
 
           // Optionally update the user's balance
           const user = await User.findOne({ userId });
