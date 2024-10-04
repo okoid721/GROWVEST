@@ -1,5 +1,5 @@
 const { User } = require("./db");
-const Withdrawal = require("./db"); // Import the Withdrawal model
+const { Withdrawal } = require("./db"); // Import the Withdrawal model // Import the Withdrawal model
 
 module.exports.handleWithdraw = async (ctx) => {
   try {
