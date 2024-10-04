@@ -82,7 +82,7 @@ bot.start(async (ctx) => {
           "\n" +
           "Remember: GROWVEST is a place where you can invest your NIARA and earn 70% of your deposit, offering boundless investment opportunities!.🚀\n" +
           "\n" +
-          "💬 *Join our Telegram group for updates and discussions:* [Join the Group](https://t.me/+2TGeHpWQ4_JhMzZk)",
+          "💬 *Join our Telegram group for updates and discussions:* [Join the Group](https://t.me/+ckTAleWgNjBjYzBk)",
         parse_mode: "Markdown",
         reply_markup: {
           keyboard: [
