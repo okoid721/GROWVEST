@@ -65,22 +65,59 @@ module.exports = {
         }
       );
 
-      // Display the "Transfer successful" button immediately
+      // Display the "Transfer successful" button with a countdown
+      let countdownSeconds = 120; // 2 minutes // 2 minutes
+      let countdownInterval = 1000; // 1 second
+      let countdownTimer;
+
       const keyboard = [
-        [{ text: "Transfer successful", callback_data: "success" }],
+        [
+          {
+            text: `Loading... (${countdownSeconds} seconds)`,
+            callback_data: "loading",
+          },
+        ],
         [{ text: "Back", callback_data: "back" }],
       ];
 
-      ctx.reply(
-        "After sending the receipt, click the button below once you've completed the transfer:",
-        {
-          reply_markup: {
-            keyboard: keyboard,
-            one_time_keyboard: true,
-            resize_keyboard: true,
-          },
+      ctx.reply("Loading......", {
+        reply_markup: {
+          keyboard: keyboard,
+          one_time_keyboard: true,
+          resize_keyboard: true,
+        },
+      });
+
+      countdownTimer = setInterval(() => {
+        countdownSeconds -= 1;
+        keyboard[0][0].text = `Loading... (${countdownSeconds} seconds)`;
+        // ctx.reply(
+        //   "After sending the receipt, click the button below once you've completed the transfer:",
+        //   {
+        //     reply_markup: {
+        //       keyboard: keyboard,
+        //       one_time_keyboard: true,
+        //       resize_keyboard: true,
+        //     },
+        //   }
+        // );
+
+        if (countdownSeconds <= 0) {
+          clearInterval(countdownTimer);
+          keyboard[0][0].text = "Transfer successful";
+          keyboard[0][0].callback_data = "success";
+          ctx.reply(
+            "Countdown Over Make sure your transfer so through to aviod banned on your account!",
+            {
+              reply_markup: {
+                keyboard: keyboard,
+                one_time_keyboard: true,
+                resize_keyboard: true,
+              },
+            }
+          );
         }
-      );
+      }, countdownInterval);
     } else if (text === "Transfer successful") {
       // Retrieve the stored investment details
       const investmentDetails = pendingInvestments[userId];
